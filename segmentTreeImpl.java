@@ -24,7 +24,7 @@ class SegmentTree{
             return Integer.MAX_VALUE;
         }
         //complete overlap
-        if(l>=low && r<=high){
+        if(low>=l && high<=r){
             return seg[ind];
         }
 
@@ -54,6 +54,35 @@ class SegmentTree{
 public class segmentTreeImpl{
     public static void main(String args[]) 
     { 
-        System.out.println("Hello World"); 
+        Scanner sc=new Scanner(System.in);
+        int n;
+        n=sc.nextInt();
+        int arr[]=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
+        SegmentTree sg1=new SegmentTree(n);
+        sg1.build(0, 0, n-1, arr);
+        int q;
+        q=sc.nextInt();
+        while(q>0){
+            int type;
+            type=sc.nextInt();
+            if(type==1){
+                int l,r;
+                l=sc.nextInt();
+                r=sc.nextInt();
+                System.out.println(sg1.query(0, 0, n-1, arr, l, r));
+            }
+            else{
+                int i,val;
+                i=sc.nextInt();
+                val=sc.nextInt();
+                arr[i]=val;
+                sg1.update(0, 0, n-1, arr, i, val);
+            }
+            q--;
+        }
+        sc.close();
     }
 }
